@@ -277,6 +277,11 @@ int main(void)
 
         XCloseDisplay(lw->display);
 
+        on_destroy();
+        free(window->__pdata);
+        free(window);
+        window = NULL;
+
         return 0;
 }
 
