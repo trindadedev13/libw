@@ -31,7 +31,7 @@ ifeq ($(ANDROID), 1)
 else
 	CC = gcc
 	CFLAGS = -I$(INCLUDE)
-	LIBS   = ../build/libw.a -lEGL -lX11 -g -fsanitize=address
+	LIBS   = ../build/libw.a -lEGL -lGL -lX11 -g -fsanitize=address
 	TARGET = $(BUILD)/example
 endif
 

@@ -7,7 +7,6 @@
 
 #include <EGL/egl.h>
 #include <EGL/eglplatform.h>
-#include <glad/glad.h>
 
 struct window_t *window = NULL;
 
@@ -69,7 +68,6 @@ static const char *egl_err_tostr(EGLint error)
 
 #undef printf
 #define LOG_TAG "nubcube"
-#define GLAD_LOAD(proc) gladLoadGLES2Loader(proc)
 
 /** we don't use WPLATFORMAPI here because android_main shouldn't be static */
 void android_main(struct android_app *);
@@ -208,8 +206,6 @@ struct linux_window {
         Display *display;
 };
 
-#define GLAD_LOAD(proc) gladLoadGLLoader(proc)
-
 WPLATFORMAPI int x11_on_delete(struct linux_window *);
 WPLATFORMAPI int x11_after_egl_config(EGLConfig);
 
@@ -339,8 +335,18 @@ WPLATFORMAPI int x11_after_egl_config(EGLConfig config)
 
 #endif
 
+#ifdef WANDROID
+#define RENDERABLE_TYPE EGL_OPENGL_ES3_BIT
+#define GLMAJOR WGLESMAJOR
+#define GLMINOR WGLESMINOR
+#else
+#define RENDERABLE_TYPE EGL_OPENGL_BIT
+#define GLMAJOR WGLMAJOR
+#define GLMINOR WGLMINOR
+#endif
+
 const EGLint attrs[] = { EGL_RENDERABLE_TYPE,
-                         EGL_OPENGL_ES3_BIT,
+                         RENDERABLE_TYPE,
                          EGL_SURFACE_TYPE,
                          EGL_WINDOW_BIT,
                          EGL_BLUE_SIZE,
@@ -351,7 +357,8 @@ const EGLint attrs[] = { EGL_RENDERABLE_TYPE,
                          8,
                          EGL_NONE };
 
-const EGLint attrs_ctx[] = { EGL_CONTEXT_CLIENT_VERSION, 3, EGL_NONE };
+const EGLint attrs_ctx[] = { EGL_CONTEXT_MAJOR_VERSION, GLMAJOR,
+                             EGL_CONTEXT_MINOR_VERSION, GLMINOR, EGL_NONE };
 
 WINTERNALAPI int egl_init(egl_after_config_callback after_config,
                           EGLNativeDisplayType native_display)
@@ -433,11 +440,6 @@ WINTERNALAPI int egl_init(egl_after_config_callback after_config,
         if (!eglMakeCurrent(window->display, window->surface, window->surface,
                             window->context)) {
                 printf("error: failed to set current EGL context");
-                return -1;
-        }
-
-        if (!GLAD_LOAD((GLADloadproc)eglGetProcAddress)) {
-                printf("error: failed to init glad\n");
                 return -1;
         }
 

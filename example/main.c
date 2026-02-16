@@ -1,5 +1,10 @@
 #include <window.h>
-#include <glad/glad.h>
+
+#ifdef WANDROID
+#include <GLES3/gl3.h>
+#else
+#include <GL/gl.h>
+#endif
 
 void on_init(void)
 {

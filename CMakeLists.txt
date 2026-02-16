@@ -5,7 +5,6 @@ project(w)
 set(CMAKE_C_STANDARD 99)
 
 set(SOURCES
-  src/glad.c
   src/window.c)
 
 add_library(w

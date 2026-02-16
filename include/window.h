@@ -28,6 +28,24 @@ extern "C" {
 #define WPLATFORMAPI static
 #endif
 
+/** OpenGL Version */
+/** Default: 3.2 */
+#ifndef WGLMAJOR
+#define WGLMAJOR 3
+#endif
+#ifndef WGLMINOR
+#define WGLMINOR 2
+#endif
+
+/** OpenGLES Version */
+/** Default: 3.2 */
+#ifndef WGLESMAJOR
+#define WGLESMAJOR 3
+#endif
+#ifndef WGLESMINOR
+#define WGLESMINOR 2
+#endif
+
 struct window_t {
         EGLDisplay display;
         EGLSurface surface;
