@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/storage/emulated/0/.projects/android/libw/build",
+  "command": "/data/data/com.termux/files/usr/bin/cc -I/storage/emulated/0/.projects/android/libw/include -O2 -g -DNDEBUG -std=gnu99 -Wall -Werror -Wextra -pedantic -pedantic-errors -o CMakeFiles/w.dir/src/glad.c.o -c /storage/emulated/0/.projects/android/libw/src/glad.c",
+  "file": "/storage/emulated/0/.projects/android/libw/src/glad.c",
+  "output": "/storage/emulated/0/.projects/android/libw/build/CMakeFiles/w.dir/src/glad.c.o"
+},
+{
+  "directory": "/storage/emulated/0/.projects/android/libw/build",
+  "command": "/data/data/com.termux/files/usr/bin/cc -I/storage/emulated/0/.projects/android/libw/include -O2 -g -DNDEBUG -std=gnu99 -Wall -Werror -Wextra -pedantic -pedantic-errors -o CMakeFiles/w.dir/src/window.c.o -c /storage/emulated/0/.projects/android/libw/src/window.c",
+  "file": "/storage/emulated/0/.projects/android/libw/src/window.c",
+  "output": "/storage/emulated/0/.projects/android/libw/build/CMakeFiles/w.dir/src/window.c.o"
+}
+]
